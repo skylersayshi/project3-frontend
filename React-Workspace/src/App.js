@@ -20,8 +20,6 @@ function App() {
     dispatch(getPosts());
   }, [dispatch]);
 
-  console.log('app is working')
-
   return (
   <div>
     {/* <Router> */}

@@ -4,7 +4,6 @@ import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 import { createPost } from '../../actions/posts';
 
-
 const Form = () => {
 
     const [postData, setPostData] = useState({
@@ -25,6 +24,8 @@ const Form = () => {
       const clear = () => {
         console.log('hello')
       }
+
+    
 
     return (
         <div>
@@ -65,18 +66,21 @@ const Form = () => {
               value={postData.tags}
               onChange={(e)=>{setPostData({...postData, tags: e.target.value})}}       
             />
-            {/* <div>
+            <div>
                 <FileBase
                   type="file"
                   multiple={false}
                   onDone={({base64})=> setPostData({...postData, selectedFile: base64})}
                 />
-            </div> */}
+            </div>
             <button type="submit">Submit</button>
             <button onClick={clear}>Clear</button>
           </form>
         </div>
       )
-}
+          }
+
 
 export default Form
+
+
