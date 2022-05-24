@@ -100,7 +100,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Homepage() {
+export default function Homepage({currentId, setCurrentId}) {
   return (
     <>
       <div className="min-h-full">
@@ -201,7 +201,7 @@ export default function Homepage() {
               <div className="mt-4">
                 <h1 className="sr-only">Recent</h1>
                 <ul role="list" className="space-y-4">
-                  <Posts />
+                  <Posts currentId={currentId} setCurrentId={setCurrentId}/>
                   {/* {questions.map((question) => (
                     <li key={question.id} className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                       <article aria-labelledby={'question-title-' + question.id}>

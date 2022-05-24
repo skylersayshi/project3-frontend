@@ -1,9 +1,10 @@
 import Post from './Post/Post';
+import Form from '../Form/Form';
 import ChangeThis from '../ChangeThis';
 
 import { useSelector } from 'react-redux';
 
-const Posts = () => {
+const Posts = ({currentId, setCurrentId}) => {
 
     const posts = useSelector((state)=>state.posts);
 
@@ -12,10 +13,14 @@ const Posts = () => {
   return (
     !posts.length ? <ChangeThis /> : (
       <div>
-        
-        {posts.map((post)=>(
-          <Post key={post._id} post={post}/>
-        ))}
+          <Form currentId={currentId} setCurrentId={setCurrentId}/>
+          <ul role="list" className="space-y-4">
+          {posts.map((post)=>(
+
+            <Post key={post._id} post={post} currentId={currentId} setCurrentId={setCurrentId}/>
+
+          ))}
+          </ul>
       </div>
     )
   )

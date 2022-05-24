@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import './index.css';
 import { useDispatch } from 'react-redux';
 import { getPosts } from './actions/posts';
@@ -14,17 +14,18 @@ import Form from './components/Form/Form';
 
 
 function App() {
+  const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
   <div>
     {/* <Router> */}
         <Navbar />
-        <Homepage />
+        <Homepage currentId={currentId} setCurrentId={setCurrentId}/>
         {/* <Routes> */}
           {/* <Route path="/welcome" element={<Welcome />} /> */}
           {/* <Route path="/" element={<Homepage />} /> */}

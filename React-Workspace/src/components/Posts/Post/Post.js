@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { Fragment } from 'react'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import {
@@ -16,14 +16,18 @@ import {
 import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { deletePost } from '../../../actions/posts';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 
-const Post = ({post}) => {
-  console.log(post)
+const Post = ({post, currentId, setCurrentId}) => {
+  
+  const dispatch = useDispatch();
+
   return (
     <div>
       
@@ -66,6 +70,7 @@ const Post = ({post}) => {
                                 >
                                   <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
+{/* Edit Button */}
                                       <Menu.Item>
                                         {({ active }) => (
                                           <a
@@ -74,9 +79,10 @@ const Post = ({post}) => {
                                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                               'flex px-4 py-2 text-sm'
                                             )}
+                                            onClick={()=>setCurrentId(post._id)}
                                           >
                                             <StarIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                            <span>Add to favorites</span>
+                                            <span>Edit Post</span>
                                           </a>
                                         )}
                                       </Menu.Item>
@@ -88,9 +94,11 @@ const Post = ({post}) => {
                                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                               'flex px-4 py-2 text-sm'
                                             )}
+// Delete Button
+                                            onClick={()=>dispatch(deletePost(post._id))}
                                           >
                                             <CodeIcon className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
-                                            <span>Embed</span>
+                                            <span>Delete Post</span>
                                           </a>
                                         )}
                                       </Menu.Item>

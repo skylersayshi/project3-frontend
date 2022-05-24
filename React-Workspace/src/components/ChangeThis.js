@@ -2,7 +2,7 @@ import React from 'react'
 
 const ChangeThis = () => {
   return (
-    <div>ChangeThis</div>
+    <div>ChangeThisToLoadingIcon</div>
   )
 }
 
