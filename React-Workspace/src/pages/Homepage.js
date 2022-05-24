@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/solid'
 import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom';
+import Posts from '../components/Posts/Posts';
 
 const user = {
   name: 'Chelsea Hagon',
@@ -111,9 +112,9 @@ export default function Homepage() {
               <nav aria-label="Sidebar" className="sticky top-4 divide-y divide-gray-300">
                 <div className="pb-8 space-y-1">
                   {navigation.map((item) => (
-                    <Link
+                    <a
                       key={item.name}
-                      to={item.href}
+                      href={item.href}
                       className={classNames(
                         item.current ? 'bg-gray-200 text-gray-900' : 'text-gray-600 hover:bg-gray-50',
                         'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
@@ -128,7 +129,7 @@ export default function Homepage() {
                         aria-hidden="true"
                       />
                       <span className="truncate">{item.name}</span>
-                    </Link>
+                    </a>
                   ))}
                 </div>
                 <div className="pt-10">
@@ -140,13 +141,13 @@ export default function Homepage() {
                   </p>
                   <div className="mt-3 space-y-2" aria-labelledby="communities-headline">
                     {communities.map((community) => (
-                      <Link
+                      <a
                         key={community.name}
-                        to={community.href}
+                        href={community.href}
                         className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md hover:text-gray-900 hover:bg-gray-50"
                       >
                         <span className="truncate">{community.name}</span>
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -171,9 +172,9 @@ export default function Homepage() {
                 <div className="hidden sm:block">
                   <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
                     {tabs.map((tab, tabIdx) => (
-                      <Link
+                      <a
                         key={tab.name}
-                        to={tab.href}
+                        href={tab.href}
                         aria-current={tab.current ? 'page' : undefined}
                         className={classNames(
                           tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
@@ -190,7 +191,7 @@ export default function Homepage() {
                             'absolute inset-x-0 bottom-0 h-0.5'
                           )}
                         />
-                      </Link>
+                      </a>
                     ))}
                   </nav>
                 </div>
@@ -198,8 +199,9 @@ export default function Homepage() {
 {/* post */}
             
               <div className="mt-4">
-                <h1 className="sr-only">Recent questions</h1>
+                <h1 className="sr-only">Recent</h1>
                 <ul role="list" className="space-y-4">
+                  <Posts />
                   {/* {questions.map((question) => (
                     <li key={question.id} className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                       <article aria-labelledby={'question-title-' + question.id}>

@@ -31,21 +31,21 @@ export default function Navbar() {
                 <div className="hidden lg:block lg:ml-6">
                   <div className="flex space-x-4">
                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                    <Link to="/profile" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <a href="/profile" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
                       View Profile
-                    </Link>
-                    <Link
-                      to="/health"
+                    </a>
+                    <a
+                      href="/health"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Lifestyle
-                    </Link>
-                    <Link
-                      to="/calendar"
+                    </a>
+                    <a
+                      href="/calendar"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Calendar
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>

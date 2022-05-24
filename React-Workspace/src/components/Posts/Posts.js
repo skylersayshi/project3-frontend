@@ -1,4 +1,5 @@
 import Post from './Post/Post';
+import ChangeThis from '../ChangeThis';
 
 import { useSelector } from 'react-redux';
 
@@ -9,11 +10,14 @@ const Posts = () => {
     console.log(posts);
 
   return (
-    <div>
-      <Post />
-      <Post />
-      <Post />
-    </div>
+    !posts.length ? <ChangeThis /> : (
+      <div>
+        
+        {posts.map((post)=>(
+          <Post key={post._id} post={post}/>
+        ))}
+      </div>
+    )
   )
 }
 

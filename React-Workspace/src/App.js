@@ -23,7 +23,8 @@ function App() {
   return (
   <div>
     {/* <Router> */}
-        {/* <Navbar /> */}
+        <Navbar />
+        <Homepage />
         {/* <Routes> */}
           {/* <Route path="/welcome" element={<Welcome />} /> */}
           {/* <Route path="/" element={<Homepage />} /> */}
@@ -31,8 +32,9 @@ function App() {
           {/* <Route path="/:id" element={<Profile />} /> */}
         {/* </Routes> */}
     {/* </Router> */}
-    <Posts />
-    <Form />
+    {/* <Posts /> */}
+    {/* <Form /> */}
+    {/* <Homepage /> */}
   </div>
   );
 }
