@@ -11,15 +11,24 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
+import getCaloriesCount from './actions/calories';
 
 
 function App() {
   const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
+
+
   useEffect(()=>{
     dispatch(getPosts());
   }, [currentId, dispatch]);
+
+  useEffect(()=>{
+    getCaloriesCount();
+  }, [])
+
+  // const [apiData, setApiData] = useState(null);
 
   return (
   <div>
