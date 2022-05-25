@@ -12,6 +12,8 @@ import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
 import getCaloriesCount from './actions/calories';
+import AuthNavbar from './components/AuthNavbar';
+import Auth from './components/Auth';
 
 
 function App() {
@@ -32,16 +34,18 @@ function App() {
 
   return (
   <div>
-    {/* <Router> */}
+    <Router>
         <Navbar />
-        <Homepage currentId={currentId} setCurrentId={setCurrentId}/>
-        {/* <Routes> */}
+        {/* <Homepage currentId={currentId} setCurrentId={setCurrentId}/> */}
+        <Routes>
           {/* <Route path="/welcome" element={<Welcome />} /> */}
           {/* <Route path="/" element={<Homepage />} /> */}
           {/* <Homepage /> */}
           {/* <Route path="/:id" element={<Profile />} /> */}
-        {/* </Routes> */}
-    {/* </Router> */}
+          <Route path="/" exact element={<AuthNavbar/>} />
+          <Route path="/auth" exact element={<Auth/>} />
+        </Routes>
+    </Router>
     {/* <Posts /> */}
     {/* <Form /> */}
     {/* <Homepage /> */}
