@@ -8,6 +8,7 @@ const Recipes = () => {
         fetchRecipes()
         .then((fetchedRecipes) => {
             setRecipes(fetchedRecipes.data)
+            console.log(recipes)
         })
     }, [])
 const elements = recipes.map((recipe) =>{
