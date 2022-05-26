@@ -64,7 +64,7 @@ const Auth = () => {
                             />
                             <label htmlFor="password">Password</label>
                             <input
-                                type="text"
+                                type="password"
                                 name="password"
                                 label="Password"
                                 onChange={handleChange}

@@ -14,6 +14,7 @@ import Form from './components/Form/Form';
 import getCaloriesCount from './actions/calories';
 import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
+import Recipes from './components/Recipes'
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           {/* <Route path="/:id" element={<Profile />} /> */}
           <Route path="/" exact element={<AuthNavbar/>} />
           <Route path="/auth" exact element={<Auth/>} />
+          <Route path="/recipes" exact element={<Recipes/>}/>
         </Routes>
     </Router>
     {/* <Posts /> */}
