@@ -33,7 +33,7 @@ const Post = ({post, currentId, setCurrentId}) => {
     if (post?.likes?.length > 0){
       return post.likes.find((like)=> like === (user?.result?._id))
       ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} like${post.likes.length>1?'s':''}`}</div>)
-      :<div>{post.likes.length}{post.likes.length ===1 ? 'Like' : 'Likes'}</div>
+      :<div>{post.likes.length} {post.likes.length ===1 ? 'Like' : 'Likes'}</div>
     }
     return <div>Like</div>
   }
@@ -145,7 +145,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                           dangerouslySetInnerHTML={{ __html: post.message }}
                         />
                         <img
-                          className="mx-auto text-sm text-gray-700 space-y-4 shadow  sm:rounded-lg"
+                          className="mx-auto mt-4 text-sm text-gray-700 space-y-4 shadow  sm:rounded-lg"
                           src={post.selectedFile ? post.selectedFile : null}
                         />
                         <div className="mt-6 flex justify-between space-x-8">

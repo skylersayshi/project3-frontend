@@ -11,8 +11,6 @@ function classNames(...classes) {
 
 export default function Navbar() {
 
-const user = null;
-
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
