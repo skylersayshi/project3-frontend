@@ -7,7 +7,7 @@ import { createPost, updatePost } from '../../actions/posts';
 const Form = ({currentId, setCurrentId}) => {
 
     const [postData, setPostData] = useState({
-        creator: '',
+        // creator: '',
         title: '',
         message: '',
         tags: '',
@@ -18,24 +18,27 @@ const Form = ({currentId, setCurrentId}) => {
     
       const dispatch = useDispatch();
 
+      const user = JSON.parse(localStorage.getItem('profile'));
+
       useEffect(()=>{
         if(post) setPostData(post);
       }, [post])
     
-      const handleSubmit = (event) =>{
+      const handleSubmit = async (event) =>{
         event.preventDefault();
-        if(currentId){
-          dispatch(updatePost(currentId, postData))
+        if(currentId===0){
+          dispatch(createPost({...postData, name: user?.result?.name}))
+          clear();
           
         } else {        
-          dispatch(createPost(postData));
+          dispatch(updatePost(currentId, {...postData, name: user?.result?.name}));
           
         }
         clear();
       }
     
       const clear = () => {
-        setCurrentId(null);
+        setCurrentId(0);
         setPostData({
           creator: '',
           title: '',
@@ -44,13 +47,17 @@ const Form = ({currentId, setCurrentId}) => {
           selectedFile: ''})
       }
 
-    
+    if(!user?.result?.name){
+      return (
+        <div>Please login to make a post</div>
+      )
+    }
 
     return (
         <div>
           <p>{currentId ? 'Edit Post' : 'New Post'}</p>
           <form autoComplete="off" onSubmit={handleSubmit} >
-            <label htmlFor="creator">Creator</label>
+            {/* <label htmlFor="creator">Creator</label>
             <input 
               type="text" 
               id="creator" 
@@ -58,7 +65,7 @@ const Form = ({currentId, setCurrentId}) => {
               label="Creator"
               value={postData.creator}
               onChange={(e)=>{setPostData({...postData, creator: e.target.value})}}       
-            />
+            /> */}
             <label htmlFor="title">Title</label>
             <input 
               type="text" 

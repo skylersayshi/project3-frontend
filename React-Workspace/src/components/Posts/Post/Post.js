@@ -17,7 +17,7 @@ import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, 
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
-import { deletePost, likePost } from '../../../actions/posts';
+import { deletePost, likePost, updatePost } from '../../../actions/posts';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -27,6 +27,16 @@ function classNames(...classes) {
 const Post = ({post, currentId, setCurrentId}) => {
   
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'));
+
+  const Likes = () =>{
+    if (post?.likes?.length > 0){
+      return post.likes.find((like)=> like === (user?.result?._id))
+      ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} like${post.likes.length>1?'s':''}`}</div>)
+      :<div>{post.likes.length}{post.likes.length ===1 ? 'Like' : 'Likes'}</div>
+    }
+    return <div>Like</div>
+  }
 
   return (
     <div>
@@ -41,7 +51,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium text-gray-900">
                                 <a href={post.id}  className="hover:underline">
-                                  {post.creator}
+                                  {post.name}
                                 </a>
                               </p>
                               <p className="text-sm text-gray-500">
@@ -51,6 +61,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                               </p>
                             </div>
                             <div className="flex-shrink-0 self-center flex">
+                            {(user?.result?._id === post?.creator) && (
                               <Menu as="div" className="relative inline-block text-left">
                                 <div>
                                   <Menu.Button className="-m-2 p-2 rounded-full flex items-center text-gray-400 hover:text-gray-600">
@@ -68,6 +79,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                                   leaveFrom="transform opacity-100 scale-100"
                                   leaveTo="transform opacity-0 scale-95"
                                 >
+                                
                                   <Menu.Items className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <div className="py-1">
 {/* Edit Button */}
@@ -118,8 +130,10 @@ const Post = ({post, currentId, setCurrentId}) => {
                                       </Menu.Item>
                                     </div>
                                   </Menu.Items>
+                                
                                 </Transition>
                               </Menu>
+                              )}
                             </div>
                           </div>
                           <h2 id={'question-title-' + post.id} className="mt-4 text-base font-medium text-gray-900">
@@ -131,15 +145,15 @@ const Post = ({post, currentId, setCurrentId}) => {
                           dangerouslySetInnerHTML={{ __html: post.message }}
                         />
                         <img
-                          className="mt-6 text-sm text-gray-700 space-y-4 shadow  sm:rounded-lg"
+                          className="mx-auto text-sm text-gray-700 space-y-4 shadow  sm:rounded-lg"
                           src={post.selectedFile ? post.selectedFile : null}
                         />
                         <div className="mt-6 flex justify-between space-x-8">
                           <div className="flex space-x-6">
                             <span className="inline-flex items-center text-sm">
-                              <button onClick={()=>dispatch(likePost(post._id))}type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+                              <button disabled={!user?.result} onClick={()=>dispatch(likePost(post._id))}type="button" className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                 <ThumbUpIcon className="h-5 w-5" aria-hidden="true" />
-                                <span className="font-medium text-gray-900">{post.likeCount}</span>
+                                <span className="font-medium text-gray-900"><Likes/></span>
                                 <span className="sr-only">likes</span>
                               </button>
                             </span>

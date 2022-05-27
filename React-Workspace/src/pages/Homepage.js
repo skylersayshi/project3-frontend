@@ -1,5 +1,7 @@
 
-import { Fragment } from 'react'
+import { Fragment, useState, useEffect } from 'react'
+import { getPosts } from '../actions/posts'
+import { useDispatch } from 'react-redux'
 import { Menu, Popover, Transition } from '@headlessui/react'
 import {
   ChatAltIcon,
@@ -100,7 +102,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Homepage({currentId, setCurrentId}) {
+export default function Homepage() {
+
+  const [currentId, setCurrentId] = useState(0);
+  const dispatch = useDispatch();
+
+
+
+  useEffect(()=>{
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
+
   return (
     <>
       <div className="min-h-full">
