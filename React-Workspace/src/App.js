@@ -7,6 +7,8 @@ import getCaloriesCount from './actions/calories';
 import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
 import Recipes from './components/Recipes'
+import Calories from './components/Calories/calories'
+
 
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
           {/* <Route path="/welcome" element={<Welcome />} /> */}
           {/* <Route path="/" element={<Homepage />} /> */}
           {/* <Homepage /> */}
+          <Route path="/calories" exact element={<Calories />}/>
           {/* <Route path="/:id" element={<Profile />} /> */}
           <Route path="/" exact element={<Homepage/>}/>
           {/* <Route path="/sign" exact element={<AuthNavbar/>} /> */}

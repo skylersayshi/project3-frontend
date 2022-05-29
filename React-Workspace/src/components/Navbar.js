@@ -42,12 +42,12 @@ export default function Navbar() {
                     >
                       Lifestyle
                     </a>
-                    <a
-                      href="/calendar"
+                    <Link
+                      to="/calories"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
-                      Calendar
-                    </a>
+                      Calories
+                    </Link>
                     <a
                       href="/recipes"
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
