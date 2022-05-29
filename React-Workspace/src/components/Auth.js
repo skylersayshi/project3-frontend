@@ -1,25 +1,45 @@
 import React, {useState} from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import {signin, signup} from '../actions/auth';
+
+
+const initialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+}
 
 const Auth = () => {
+
+
     const [isSignup, setIsSignup] = useState(false);
-    const handleSubmit = () =>{
+    const [formData, setFormData] = useState(initialState);
+    const dispatch = useDispatch();
+    const history = useNavigate();
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log(formData);
+
+        if(isSignup){
+            dispatch(signup(formData, history))
+        } else{
+            dispatch(signin(formData,history))
+        }
 
     }
-    const handleChange = () =>{
+    const handleChange = (e) =>{
+        setFormData({...formData, [e.target.name]: e.target.value});
 
     }
     const switchMode = () =>{
+        setFormData(initialState);
         setIsSignup((prev)=> !prev)
 
     };
-    const googleSuccess = async (res) =>{
-        console.log(res)
-    }
-    const googleFailure = (error) =>{
-        console.log(error)
-        console.log("Google Sign In Failed")
-    }
 
 
   return (
@@ -64,7 +84,7 @@ const Auth = () => {
                             />
                             <label htmlFor="password">Password</label>
                             <input
-                                type="text"
+                                type="password"
                                 name="password"
                                 label="Password"
                                 onChange={handleChange}
@@ -79,7 +99,7 @@ const Auth = () => {
                             required
                             />
                         }
-                    <GoogleLogin 
+                    {/* <GoogleLogin 
                         clientId="376670890278-p7nckaeto64f2764ealbjp7p1f4qs0pm.apps.googleusercontent.com"
                         render={(renderProps)=>(
                             <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
@@ -89,7 +109,7 @@ const Auth = () => {
                         onSuccess={googleSuccess}
                         onFailure={googleFailure}
                         cookiePolicy="single_host_origin"
-                    />
+                    /> */}
                     <button type="submit">{isSignup ? 'Sign Up' : 'Sign In'}</button>
                     <button onClick={switchMode}>{isSignup ? 'Already have an account? Sign In' : 'Create Account'}</button>
                 

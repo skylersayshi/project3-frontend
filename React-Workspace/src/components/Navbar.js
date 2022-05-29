@@ -11,8 +11,6 @@ function classNames(...classes) {
 
 export default function Navbar() {
 
-const user = null;
-
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -49,6 +47,12 @@ const user = null;
                       className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                       Calendar
+                    </a>
+                    <a
+                      href="/recipes"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      Healthy Recipes
                     </a>
                   </div>
                 </div>
