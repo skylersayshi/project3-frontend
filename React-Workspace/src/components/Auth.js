@@ -92,7 +92,7 @@ const Auth = () => {
                             />
                         { isSignup && 
                             <input 
-                            type="text"
+                            type="password"
                             name="confirmPassword"
                             label="Confirm Password"
                             onChange={handleChange}
