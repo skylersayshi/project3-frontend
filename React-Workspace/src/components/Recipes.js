@@ -17,18 +17,31 @@ const elements = recipes.map((recipe) =>{
         {console.log(recipe)}
 
         <div className="name">
-        {recipe.name}
+        <h4>Name: {recipe.name}</h4>
         </div>
 
+        <br />
+
         <div className="instructions">
-        {recipe.instructions}
+        <h4>
+          
+          Instructions: {recipe.instructions}
+          </h4>
         </div>
+
+      <br />
 
         <div className="ingredients">
 
-        {recipe.ingredients}
+        <h4>
+          
+          Ingredients: {recipe.ingredients}
+          
+          </h4>
 
         </div>
+
+        <br />
 
       <div className="img">
        <img src={recipe.img} alt=""  /> 
@@ -36,9 +49,12 @@ const elements = recipes.map((recipe) =>{
 
         </div>
 )})
+
 console.log(elements)
+
+
   return (
-    <div className="header">Recipes
+    <div className="header"> <h1>Healthy Recipe List</h1>
         {elements}
 
     </div>
