@@ -2,3 +2,7 @@
     background-color: aqua;
     border: 20px black solid;
 }
+
+.header {
+    justify-content: center;
+}
