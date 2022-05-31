@@ -8,6 +8,7 @@ import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
 import Recipes from './components/Recipes'
 import Calories from './components/Calories/calories'
+import Profile from './pages/Profile';
 
 
 
@@ -35,6 +36,7 @@ function App() {
           {/* <Route path="/sign" exact element={<AuthNavbar/>} /> */}
           <Route path="/auth" exact element={<Auth/>} />
           <Route path="/recipes" exact element={<Recipes/>}/>
+          <Route path="/profile" exact element={<Profile />}/>
         </Routes>
     </Router>
     {/* <Posts /> */}

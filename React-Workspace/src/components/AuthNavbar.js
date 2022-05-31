@@ -17,6 +17,7 @@ const AuthNavbar = () => {
     const dispatch = useDispatch();
     const history = useNavigate();
     const location = useLocation();
+    console.log(user);
 
     const logout = () =>{
       dispatch({type: 'LOGOUT'})
@@ -66,12 +67,12 @@ const AuthNavbar = () => {
                       >
                         Lifestyle
                       </a>
-                      <a
-                        href="/calendar"
+                      <Link
+                        to="/calories"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Calorie
-                      </a>
+                      </Link>
                       <a
                         href="/recipes"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
