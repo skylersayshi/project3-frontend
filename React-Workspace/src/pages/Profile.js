@@ -61,7 +61,12 @@ export default function Profile() {
           </div>
           <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 truncate">{user.result.name}</h1>
+              <h1 className="text-4xl font-bold text-gray-900 truncate">{user.result.name}</h1>
+            </div>
+            <div>
+            <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Edit
+            </button>
             </div>
           </div>
         </div>
