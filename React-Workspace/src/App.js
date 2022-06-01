@@ -14,12 +14,6 @@ import Profile from './pages/Profile';
 
 function App() {
 
-  useEffect(()=>{
-    getCaloriesCount();
-  }, [])
-
-  // const [apiData, setApiData] = useState(null);
-
   return (
   <div>
     <Router>
