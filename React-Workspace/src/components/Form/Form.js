@@ -120,7 +120,7 @@ const Form = ({currentId, setCurrentId}) => {
           placeholder="#tags (ex: fitness, goals, fun)"
           className="block m-2 rounded-md resize-none text-indigo-500 placeholder-indigo-500 focus:ring-0 sm:text-sm"
           value={postData.tags}
-          onChange={(e)=>{setPostData({...postData, tags: e.target.value.split(', ')})}}       
+          onChange={(e)=>{setPostData({...postData, tags: e.target.value.split(',')})}}       
         />
 
         {/* Spacer element to match the height of the toolbar */}
