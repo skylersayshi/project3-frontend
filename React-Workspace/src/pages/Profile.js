@@ -1,5 +1,8 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
+import React, {useState, useEffect} from 'react'
+import Posts from '../components/Posts/Posts'
+import decode from 'jwt-decode';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const profile = {
   name: 'Ricardo Cooper',
@@ -20,7 +23,32 @@ const profile = {
   ],
 }
 
-export default function Example() {
+export default function Profile() {
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const dispatch = useDispatch();
+    const history = useNavigate();
+    const location = useLocation();
+    console.log(user);
+
+    const logout = () =>{
+      dispatch({type: 'LOGOUT'})
+      history('/auth');
+      setUser(null);
+    }
+
+    useEffect(()=>{
+      const token = user?.token;
+      //JWT
+      if(token){
+        const decodedToken = decode(token);
+        if(decodedToken.exp *1000< new Date().getTime()) logout()
+      }
+
+      setUser(JSON.parse(localStorage.getItem('profile')))
+    },[location]);
+
+  
   return (
     <div>
       <div>
@@ -33,14 +61,17 @@ export default function Example() {
           </div>
           <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 truncate">{profile.name}</h1>
+              <h1 className="text-4xl font-bold text-gray-900 truncate">{user.result.name}</h1>
+            </div>
+            <div>
+            <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Edit
+            </button>
             </div>
           </div>
         </div>
-        <div className="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
-          <h1 className="text-2xl font-bold text-gray-900 truncate">{profile.name}</h1>
-        </div>
       </div>
+      <h1>hello world</h1>
     </div>
   )
 }

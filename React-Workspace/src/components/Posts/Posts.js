@@ -7,9 +7,12 @@ import { useSelector } from 'react-redux';
 const Posts = ({currentId, setCurrentId, post}) => {
 
     const posts = useSelector((state)=>state.posts);
-    // const sortedPosts = posts.sort((a, b)=> b.creator - a.creator)
-
-    // console.log(sortedPosts);
+    let sortedPosts = []
+    for(let i = posts.length-1; i >= 0; i--){
+      sortedPosts.push(posts[i])
+    }
+    console.log(sortedPosts);
+    
     
 
   return (
@@ -18,7 +21,7 @@ const Posts = ({currentId, setCurrentId, post}) => {
           <Form currentId={currentId} setCurrentId={setCurrentId}/>
           <ul role="list" className="space-y-4">
           { 
-            posts.map((post)=>(
+            sortedPosts.map((post)=>(
 
             <Post key={post._id} post={post} currentId={currentId} setCurrentId={setCurrentId}/>
 

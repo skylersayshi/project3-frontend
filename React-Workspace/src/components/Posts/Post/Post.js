@@ -32,7 +32,7 @@ const Post = ({post, currentId, setCurrentId}) => {
   const Likes = () =>{
     if (post?.likes?.length > 0){
       return post.likes.find((like)=> like === (user?.result?._id))
-      ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} like${post.likes.length>1?'s':''}`}</div>)
+      ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} Like${post.likes.length>1?'s':''}`}</div>)
       :<div>{post.likes.length} {post.likes.length ===1 ? 'Like' : 'Likes'}</div>
     }
     return <div>Like</div>
@@ -46,7 +46,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                         <div>
                           <div className="flex space-x-3">
                             <div className="flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full" src={post.selectedFile.data} alt="" />
+                              <img className="h-10 w-10 rounded-full" src={post.profilePic} alt="" />
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium text-gray-900">

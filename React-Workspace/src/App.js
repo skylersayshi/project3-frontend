@@ -3,7 +3,6 @@ import './index.css';
 import Homepage from './pages/Homepage';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import getCaloriesCount from './actions/calories';
 import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
 import Recipes from './components/Recipes'
@@ -13,12 +12,6 @@ import Profile from './pages/Profile';
 
 
 function App() {
-
-  useEffect(()=>{
-    getCaloriesCount();
-  }, [])
-
-  // const [apiData, setApiData] = useState(null);
 
   return (
   <div>

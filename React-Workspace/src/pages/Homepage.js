@@ -19,12 +19,7 @@ import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, 
 import { Link } from 'react-router-dom';
 import Posts from '../components/Posts/Posts';
 
-const user = {
-  name: 'Chelsea Hagon',
-  email: 'chelsea.hagon@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+
 const navigation = [
   { name: 'Home', href: '/', icon: HomeIcon, current: true },
   { name: 'Popular', href: '/popular', icon: FireIcon, current: false },
@@ -112,6 +107,7 @@ export default function Homepage() {
   useEffect(()=>{
     dispatch(getPosts());
   }, [currentId, dispatch]);
+  const user=JSON.parse(localStorage.getItem('profile'));
 
   return (
     <>
