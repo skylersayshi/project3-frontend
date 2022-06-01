@@ -13,9 +13,13 @@ const Recipes = () => {
         })
     }, [])
 const elements = recipes.map((recipe) =>{
-   return( <div className="recipes">
-        {console.log(recipe)}
+   return( 
+   <div className="recipes">
+   
+     <button className="button">ADD RECIPE</button>
 
+ 
+        {console.log(recipe)}
         <div className="name">
         <h4>Name: {recipe.name}</h4>
         </div>
