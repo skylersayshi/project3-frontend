@@ -32,7 +32,7 @@ const Post = ({post, currentId, setCurrentId}) => {
   const Likes = () =>{
     if (post?.likes?.length > 0){
       return post.likes.find((like)=> like === (user?.result?._id))
-      ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} like${post.likes.length>1?'s':''}`}</div>)
+      ?(<div>{post.likes.length > 2 ? `You and ${post.likes.length-1} others` : `${post.likes.length} Like${post.likes.length>1?'s':''}`}</div>)
       :<div>{post.likes.length} {post.likes.length ===1 ? 'Like' : 'Likes'}</div>
     }
     return <div>Like</div>
