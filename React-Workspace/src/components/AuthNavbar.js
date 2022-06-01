@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import FileBase from 'react-file-base64';
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
@@ -17,7 +18,6 @@ const AuthNavbar = () => {
     const dispatch = useDispatch();
     const history = useNavigate();
     const location = useLocation();
-    console.log(user);
 
     const logout = () =>{
       dispatch({type: 'LOGOUT'})
@@ -35,6 +35,8 @@ const AuthNavbar = () => {
 
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
+
+    console.log(user?.result);
 
     return (
       <Disclosure as="nav" className="bg-gray-800">
@@ -132,7 +134,7 @@ const AuthNavbar = () => {
                           <img
                             className="h-8 w-8 rounded-full"
                             edit to user profile image
-                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            src={user?.result?.selectedFile}
                             alt=""
                           />
                         </Menu.Button>

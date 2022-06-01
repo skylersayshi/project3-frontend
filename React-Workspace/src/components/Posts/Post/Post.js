@@ -46,7 +46,7 @@ const Post = ({post, currentId, setCurrentId}) => {
                         <div>
                           <div className="flex space-x-3">
                             <div className="flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full" src={post.selectedFile.data} alt="" />
+                              <img className="h-10 w-10 rounded-full" src={post.profilePic} alt="" />
                             </div>
                             <div className="min-w-0 flex-1">
                               <p className="text-sm font-medium text-gray-900">
