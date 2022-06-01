@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {signin, signup} from '../actions/auth';
+import FileBase from 'react-file-base64';
 
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
     email: '',
     password: '',
     confirmPassword: '',
+    selectedFile: '',
 }
 
 const Auth = () => {
@@ -99,17 +101,13 @@ const Auth = () => {
                             required
                             />
                         }
-                    {/* <GoogleLogin 
-                        clientId="376670890278-p7nckaeto64f2764ealbjp7p1f4qs0pm.apps.googleusercontent.com"
-                        render={(renderProps)=>(
-                            <button onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                GoogleSignIn
-                            </button>
-                        )}
-                        onSuccess={googleSuccess}
-                        onFailure={googleFailure}
-                        cookiePolicy="single_host_origin"
-                    /> */}
+                    <div>
+                        <FileBase
+                        type="file"
+                        multiple={false}
+                        onDone={({base64})=> setFormData({...formData, selectedFile: base64})}
+                        />
+                    </div>
                     <button type="submit">{isSignup ? 'Sign Up' : 'Sign In'}</button>
                     <button onClick={switchMode}>{isSignup ? 'Already have an account? Sign In' : 'Create Account'}</button>
                 
