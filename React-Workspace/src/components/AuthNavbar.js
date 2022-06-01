@@ -61,24 +61,24 @@ const AuthNavbar = () => {
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                   
-                      <a
-                        href="/health"
+                      <Link
+                        to="/posts"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
-                        Lifestyle
-                      </a>
+                        Feed
+                      </Link>
                       <Link
                         to="/calories"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Calorie
                       </Link>
-                      <a
-                        href="/recipes"
+                      <Link
+                        to="/recipes"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
                         Healthy Recipes
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ const AuthNavbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href="/profile"
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
