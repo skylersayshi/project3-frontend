@@ -1,4 +1,5 @@
 import * as api from '../api/index.js';
+import {getProfile} from '../api/profile.js';
 
 export const signin = (formData, history) => async(dispatch) =>{
     try{
@@ -25,3 +26,14 @@ export const signup = (formData, history) => async(dispatch) =>{
         console.log(error)
     }
 }
+
+export const getprofile = (updatedSettings, history) => async(dispatch) =>{
+    try{
+        const {data} = await getProfile(updatedSettings);
+        dispatch({type: 'PROF', data});
+        history('/profile')
+    } catch(error){
+        console.log(error)
+    }
+}
+
