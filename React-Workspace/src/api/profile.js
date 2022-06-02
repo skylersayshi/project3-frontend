@@ -3,26 +3,16 @@ import axios from 'axios';
 const API = axios.create({baseURL: 'http://localhost:5001'})
 
 API.interceptors.request.use((req)=>{
-    if(localStorage.getItem('profile')){
-        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    if(localStorage.getItem('user')){
+        req.headers.authorization = `Bearer ${JSON.parse(localStorage.getItem('user')).token}`;
     }
     return req;
 })
 
-// const url = 'http://localhost:5001/posts';
 
-// export const fetchPosts = () => API.get('/profile');
+export const getProfile = () => API.get(`/profile`);
 
-// export const createPost = (newPost) => API.post('/profile', newPost);
 
-// export const updatePost = (id, updatedPost) => API.patch(`profile/${id}`, updatedPost);
+export const createUserInfo = (userData) => API.post('/profile', userData);
 
-// export const deletePost = (id) => API.delete(`/profile/${id}`);
-
-// export const likePost = (id) => API.patch(`/profile/${id}/likePost`);
-
-// export const signIn = (formData) => API.post('/users/signin', formData);
-// export const signUp = (formData) => API.post('/users/signup', formData);
-
-export const getProfile = (id, updatedSettings) => API.patch(`/users/profile/${id}`);
-
+export const patchProfile = (userData) => API.put(`/profile`, userData);

@@ -1,12 +1,11 @@
 import React, {useState, useEffect} from 'react'
-import Posts from '../components/Posts/Posts'
-import decode from 'jwt-decode';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
+import { useDispatch, useSelector } from 'react-redux';
+import FileBase from 'react-file-base64';
+import { getProfile } from '../api/profile';
 
 const profile = {
-  name: 'Ricardo Cooper',
-  
   avatar:
     'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
   backgroundImage:
@@ -37,10 +36,11 @@ export default function Profile() {
 
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
-
+  
   
   return (
     <div>
+      {console.log(getProfile)}
       <div>
         <img className="h-32 w-full object-cover lg:h-48" src={profile.backgroundImage} alt="" />
       </div>

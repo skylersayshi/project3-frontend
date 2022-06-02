@@ -36,7 +36,7 @@ const AuthNavbar = () => {
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
 
-    console.log(user?.result);
+    // console.log(user?.result);
 
     return (
       <Disclosure as="nav" className="bg-gray-800">

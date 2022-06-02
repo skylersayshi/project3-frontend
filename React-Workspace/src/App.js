@@ -8,7 +8,7 @@ import Auth from './components/Auth';
 import Recipes from './components/Recipes'
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
-import Settings from './pages/Settings'
+import Settings from './pages/SettingsForm'
 
 
 

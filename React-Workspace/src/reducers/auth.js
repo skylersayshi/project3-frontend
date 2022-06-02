@@ -8,8 +8,8 @@ const authReducer = (state = {authData: null}, action) =>{
             localStorage.clear();
             return{...state, authData: null};
 
-        case "PROF":
-            localStorage.setItem('profile', JSON.stringify({...action?.data}))
+        case "FETCH":
+            localStorage.setItem('user', JSON.stringify({...action?.data}))
             return {...state, authData: action?.data};
 
         default:
