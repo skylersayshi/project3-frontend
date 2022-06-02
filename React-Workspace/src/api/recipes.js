@@ -4,6 +4,8 @@ const url = 'http://localhost:5001/recipes';
 
 export const fetchRecipes = () => axios.get(url)
 
+export const createRecipes = () => axios.post(url, )
+
 // export const 
 
 // export const fetchPosts = () => axios.get(url);
