@@ -8,6 +8,7 @@ import Auth from './components/Auth';
 import Recipes from './components/Recipes'
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
+import Settings from './pages/Settings'
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/auth" exact element={<Auth/>} />
           <Route path="/recipes" exact element={<Recipes/>}/>
           <Route path="/profile" exact element={<Profile />}/>
+          <Route path="/profile/edit" exact element={<Settings />}/>
         </Routes>
     </Router>
     {/* <Posts /> */}
