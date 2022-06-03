@@ -15,7 +15,7 @@ export const fetchPosts = () => API.get('/posts');
 
 export const createPost = (newPost) => API.post('/posts', newPost);
 
-export const updatePost = (id, updatedPost) => API.patch(`posts/${id}`, updatedPost);
+export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
 
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 
@@ -23,3 +23,19 @@ export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 
 export const signIn = (formData) => API.post('/users/signin', formData);
 export const signUp = (formData) => API.post('/users/signup', formData);
+
+
+//getrecipes
+
+
+//createrecipe
+//updaterecipe
+//deleterecipe
+
+export const getrecipes = () => API.get('/recipes');
+
+export const createrecipe = (newRecipe) => API.post('/recipes', newRecipe);
+
+export const updaterecipe = (id, updatedRecipe) => API.patch(`/recipes/${id}`, updatedRecipe);
+
+export const deleterecipe = (id) => API.delete(`/recipes/${id}`);
