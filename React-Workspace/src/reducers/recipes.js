@@ -1,7 +1,4 @@
-// FETCH_RECIPES
-// CREATE_RECIPE
-// UPDATE_RECIPE
-// DELETE_RECIPE
+
 
 export default (recipes = [], action) => {
     switch(action.type){

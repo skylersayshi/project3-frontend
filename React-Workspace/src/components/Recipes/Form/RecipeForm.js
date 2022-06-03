@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, updateRecipe } from '../../../actions/recipes';
+import FileBase from 'react-file-base64';
 
 const RecipeForm = ({currentId, setCurrentId}) => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -10,6 +11,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
     ingredients: '',
     instructions: '',
     img: '',
+    selectedFile: '',
 
   });
 
@@ -86,6 +88,23 @@ const RecipeForm = ({currentId, setCurrentId}) => {
           placeholder="img"
           value={recipeData.img}
         />
+
+        <div>Or...Upload your own Image</div>
+
+
+        <div className='mt-2'>
+          <div className='mt-2'>Choose Recipe Image</div>
+           <FileBase
+           type="file"
+           multiple={false}
+           onDone={({base64})=> setRecipeData({...recipeData, selectedFile: base64})}
+           value={recipeData.selectedFile}
+            />
+
+            </div>
+
+
+
         <button type="submit">Submit</button>
       </form>
     </div>
