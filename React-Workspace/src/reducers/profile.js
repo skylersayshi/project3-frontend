@@ -1,6 +1,6 @@
 export default (Info = [], action) => {
     switch(action.type){
-        case 'FETCH':
+        case 'FETCH_PROFILE':
             return action.payload;
         case 'CREATE':
             return [...Info, action.payload];

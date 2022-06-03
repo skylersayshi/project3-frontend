@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import Homepage from './pages/Homepage';
 import Navbar from './components/Navbar';
@@ -9,11 +9,17 @@ import Recipes from './components/Recipes'
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
 import Settings from './pages/SettingsForm'
+import {getUserInfo} from './actions/userInfo'
+import { useDispatch } from 'react-redux'
 
 
 
 function App() {
-
+  const [currentId, setCurrentId] = useState(0);
+   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch((getUserInfo));
+  }, [currentId, dispatch]);
   return (
   <div>
     <Router>

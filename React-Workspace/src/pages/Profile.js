@@ -13,8 +13,8 @@ const profile = {
 }
 
 export default function Profile() {
-
-  const user = JSON.parse(localStorage.getItem('user'));
+  const [currentId, setCurrentId] = useState(0);
+  const user = useSelector((state)=>state.users)
   console.log(user)
 
   const [User, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -40,13 +40,16 @@ export default function Profile() {
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
   
+  //   useEffect(()=>{
+  //   dispatch((getProfile));
+  // }, [currentId, dispatch]);
   
   return (
     <div>
       <div>
         <img className="h-32 w-full object-cover lg:h-48" src={profile.backgroundImage} alt="" />
       </div>
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div clagetssName="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
           <div className="flex">
             <img className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src={profile.avatar} alt="" />

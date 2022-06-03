@@ -4,7 +4,7 @@ export const getUserInfo = () => async (dispatch) => {
 
     try{
         const {data} = await api.getProfile();
-        dispatch({type: 'FETCH', payload: data});
+        dispatch({type: 'FETCH_PROFILE', payload: data});
     }catch(error){
         console.log(error.message)
     }

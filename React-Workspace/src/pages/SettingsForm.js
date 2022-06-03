@@ -10,6 +10,7 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
 
  const Settings = ({currentId, setCurrentId}) => {
   const user = JSON.parse(localStorage.getItem('profile'));
+  const dispatch = useDispatch();
 
   const [userData, setUserData] = useState({
       // creator: '',
@@ -23,7 +24,6 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
 
     const userInfo = useSelector((state)=> currentId ? state.users.find((UserInfo)=> UserInfo._id === currentId) : null);
   
-    const dispatch = useDispatch();
 
     useEffect(()=>{
       if(userInfo) setUserData(userInfo);
@@ -32,10 +32,11 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
     const handleSubmit = async (event) =>{
       event.preventDefault();
       if(currentId===0){
-        dispatch(createUserInfo({...userData, firstName: user?.result?.firstName, lastName: user?.result?.lastName, profilePic: user?.result?.selectedFile}))
+        dispatch(createUserInfo({...userData}))
         
-      } else {        
-        dispatch(patchProfile(currentId, {...userData, firstName: user?.result?.firstName, lastName: user?.result?.lastName, profilePic: user?.result?.selectedFile}));
+      } 
+      else {        
+        dispatch(patchProfile(currentId, {...userData}));
         
       }
       clear();
@@ -52,6 +53,8 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
       })
     }
 
+
+    
   return (
     <>
                 <div className="flex-1 xl:overflow-y-auto">
