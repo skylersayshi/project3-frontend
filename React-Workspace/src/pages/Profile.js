@@ -14,7 +14,10 @@ const profile = {
 
 export default function Profile() {
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user)
+
+  const [User, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const history = useNavigate();
     const location = useLocation();
@@ -27,7 +30,7 @@ export default function Profile() {
     }
 
     useEffect(()=>{
-      const token = user?.token;
+      const token = User?.token;
       //JWT
       if(token){
         const decodedToken = decode(token);
@@ -40,7 +43,6 @@ export default function Profile() {
   
   return (
     <div>
-      {console.log(getProfile)}
       <div>
         <img className="h-32 w-full object-cover lg:h-48" src={profile.backgroundImage} alt="" />
       </div>
@@ -51,7 +53,7 @@ export default function Profile() {
           </div>
           <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
-              <h1 className="text-4xl font-bold text-gray-900 truncate">{user.result.name}</h1>
+              <h1 className="text-4xl font-bold text-gray-900 truncate">{User.result.name}</h1>
             </div>
             <div>
             <Link to="/profile/edit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

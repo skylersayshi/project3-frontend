@@ -6,5 +6,5 @@ import auth from './auth';
 import Info from './profile'
 
 export default combineReducers({
-   posts, apiData, auth
+   posts, apiData, auth, Info
 });

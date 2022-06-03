@@ -11,9 +11,9 @@ export const getUserInfo = () => async (dispatch) => {
 
 }
 
-export const createUserInfo = (post) => async (dispatch) =>{
+export const createUserInfo = (e) => async (dispatch) =>{
     try{
-        const { data } = await api.createUserInfo(post);
+        const { data } = await api.createUserInfo(e);
         dispatch({type: 'CREATE', payload: data});
     }
     catch(error){
@@ -21,9 +21,9 @@ export const createUserInfo = (post) => async (dispatch) =>{
     }
 }
 
-export const patchProfile = (id, post) => async (dispatch) => {
+export const patchProfile = (id, e) => async (dispatch) => {
     try {
-        const {data} = await api.patchProfile(id, post);
+        const {data} = await api.patchProfile(id, e);
         dispatch({type: 'UPDATE', payload: data});
     } catch (error){
         console.log(error.message);

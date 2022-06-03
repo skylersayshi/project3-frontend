@@ -13,6 +13,6 @@ API.interceptors.request.use((req)=>{
 export const getProfile = () => API.get(`/profile`);
 
 
-export const createUserInfo = (userData) => API.post('/profile', userData);
+export const createUserInfo = (Info) => API.post('/profile', Info);
 
-export const patchProfile = (userData) => API.put(`/profile`, userData);
+export const patchProfile = (Info) => API.put(`/profile`, Info);

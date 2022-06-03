@@ -9,8 +9,7 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
 // }
 
  const Settings = ({currentId, setCurrentId}) => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user)
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   const [userData, setUserData] = useState({
       // creator: '',
