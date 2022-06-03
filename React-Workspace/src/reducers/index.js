@@ -4,7 +4,8 @@ import posts from './posts';
 import apiData from './posts';
 import auth from './auth';
 import recipes from './recipes';
+import Info from './profile'
 
 export default combineReducers({
-   posts, apiData, auth, recipes
+   posts, apiData, auth, recipes, Info
 });

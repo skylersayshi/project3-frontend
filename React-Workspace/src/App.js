@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import Homepage from './pages/Homepage';
 import Navbar from './components/Navbar';
@@ -7,6 +7,9 @@ import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
+import Settings from './pages/SettingsForm'
+import {getUserInfo} from './actions/userInfo'
+import { useDispatch } from 'react-redux'
 import NewRecipes from './components/NewRecipe'
 import EditRecipe from './components/EditRecipe'
 import Recipes from './components/Recipes/Recipes';
@@ -14,7 +17,11 @@ import Recipes from './components/Recipes/Recipes';
 
 
 function App() {
-
+  const [currentId, setCurrentId] = useState(0);
+   const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch((getUserInfo));
+  }, [currentId, dispatch]);
   return (
   <div>
     <Router>
@@ -34,6 +41,7 @@ function App() {
           <Route path="/recipes/new" exact element={<NewRecipes/>}/>
           <Route path="/recipes/edit" exact element={<EditRecipe/>}/>
           <Route path="/profile" exact element={<Profile />}/>
+          <Route path="/profile/edit" exact element={<Settings />}/>
         </Routes>
     </Router>
     {/* <Posts /> */}

@@ -9,20 +9,9 @@ API.interceptors.request.use((req)=>{
     return req;
 })
 
-// const url = 'http://localhost:5001/posts';
 
-// export const fetchPosts = () => API.get('/profile');
+export const getProfile = () => API.get(`/profile`);
 
-// export const createPost = (newPost) => API.post('/profile', newPost);
+export const createUserInfo = (Info) => API.post('/profile', Info);
 
-// export const updatePost = (id, updatedPost) => API.patch(`profile/${id}`, updatedPost);
-
-// export const deletePost = (id) => API.delete(`/profile/${id}`);
-
-// export const likePost = (id) => API.patch(`/profile/${id}/likePost`);
-
-// export const signIn = (formData) => API.post('/users/signin', formData);
-// export const signUp = (formData) => API.post('/users/signup', formData);
-
-export const getProfile = (id, updatedSettings) => API.patch(`/users/profile/${id}`);
-
+export const patchProfile = (id, Info) => API.patch(`/profile`, Info);

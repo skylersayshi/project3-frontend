@@ -36,7 +36,7 @@ const AuthNavbar = () => {
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
 
-    console.log(user?.result);
+    // console.log(user?.result);
 
     return (
       <Disclosure as="nav" className="bg-gray-800">
@@ -165,7 +165,7 @@ const AuthNavbar = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <a
-                                href="#"
+                                href="/profile/edit"
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
