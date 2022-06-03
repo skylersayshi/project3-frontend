@@ -13,7 +13,6 @@ const profile = {
 }
 
 export default function Profile() {
-  const [currentId, setCurrentId] = useState(0);
   const user = useSelector((state)=>state.users)
   console.log(user)
 
@@ -23,22 +22,22 @@ export default function Profile() {
     const location = useLocation();
     console.log(user);
 
-    const logout = () =>{
-      dispatch({type: 'LOGOUT'})
-      history('/auth');
-      setUser(null);
-    }
+    // const logout = () =>{
+    //   dispatch({type: 'LOGOUT'})
+    //   history('/auth');
+    //   setUser(null);
+    // }
 
-    useEffect(()=>{
-      const token = User?.token;
-      //JWT
-      if(token){
-        const decodedToken = decode(token);
-        if(decodedToken.exp *1000< new Date().getTime()) logout()
-      }
+    // useEffect(()=>{
+    //   const token = User?.token;
+    //   //JWT
+    //   if(token){
+    //     const decodedToken = decode(token);
+    //     if(decodedToken.exp *1000< new Date().getTime()) logout()
+    //   }
 
-      setUser(JSON.parse(localStorage.getItem('profile')))
-    },[location]);
+    //   setUser(JSON.parse(localStorage.getItem('profile')))
+    // },[location]);
   
   //   useEffect(()=>{
   //   dispatch((getProfile));

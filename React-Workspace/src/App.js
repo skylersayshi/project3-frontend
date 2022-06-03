@@ -8,7 +8,6 @@ import Auth from './components/Auth';
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
 import Settings from './pages/SettingsForm'
-import {getUserInfo} from './actions/userInfo'
 import { useDispatch } from 'react-redux'
 import NewRecipes from './components/NewRecipe'
 import EditRecipe from './components/EditRecipe'
@@ -17,11 +16,7 @@ import Recipes from './components/Recipes/Recipes';
 
 
 function App() {
-  const [currentId, setCurrentId] = useState(0);
-   const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch((getUserInfo));
-  }, [currentId, dispatch]);
+  
   return (
   <div>
     <Router>
