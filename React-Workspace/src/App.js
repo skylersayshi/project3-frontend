@@ -5,11 +5,11 @@ import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AuthNavbar from './components/AuthNavbar';
 import Auth from './components/Auth';
-import Recipes from './components/Recipes'
 import Calories from './components/Calories/calories'
 import Profile from './pages/Profile';
 import NewRecipes from './components/NewRecipe'
 import EditRecipe from './components/EditRecipe'
+import Recipes from './components/Recipes/Recipes';
 
 
 

@@ -107,6 +107,7 @@ export default function Homepage() {
   useEffect(()=>{
     dispatch(getPosts());
   }, [currentId, dispatch]);
+  
   const user=JSON.parse(localStorage.getItem('profile'));
 
   return (
