@@ -2,55 +2,41 @@ import React, { useState, useEffect } from 'react';
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { createUserInfo, patchProfile } from '../actions/userInfo';
+import { updateprofile, getusers } from '../actions/auth';
+import { updateProfile } from '../api';
+import Profile from './Profile';
 
 // function profileSettings(...classes) {
 //   return classes.filter(Boolean).join(' ')
 // }
 
- const Settings = ({currentId, setCurrentId}) => {
-  const user = JSON.parse(localStorage.getItem('profile'));
+ const Settings = () => {
+  const user = JSON.parse(localStorage.getItem('profile'))
+  const [currentId, setCurrentId] = useState(user.result._id)
   const dispatch = useDispatch();
+  const userProfile = useSelector((state)=> currentId ? state.users.find((specificUser)=> specificUser._id === currentId) : null);
+
+  useEffect(()=>{
+    dispatch(getusers());
+  }, [currentId, dispatch]);
 
   const [userData, setUserData] = useState({
       // creator: '',
-      firstName: '',
-      lastName: '',
+      name: '',
       bio: '',
-      selectedFile: '',
-      profilePic: '',
+      selectedFile: user?.result?.selectedFile,
       banner: '',
-    });
-
-    const userInfo = useSelector((state)=> currentId ? state.users.find((UserInfo)=> UserInfo._id === currentId) : null);
-  
+    });  
 
     useEffect(()=>{
-      if(userInfo) setUserData(userInfo);
-    }, [userInfo])
+      if(userProfile) setUserData(userProfile);
+    }, [userProfile]);
   
     const handleSubmit = async (event) =>{
       event.preventDefault();
-      if(currentId===0){
-        dispatch(createUserInfo({...userData}))
-        
-      } 
-      else {        
-        dispatch(patchProfile(currentId, {...userData}));
-        
-      }
-      clear();
-    }
-  
-    const clear = () => {
-      setUserData({
-        firstName: '',
-        lastName: '',
-        bio: '',
-        selectedFile: '',
-        profilePic: '',
-        banner: '',
-      })
+      
+        dispatch(updateprofile(currentId, {...userData}))
+        console.log(currentId);
     }
 
 
@@ -69,36 +55,20 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
 
                         <div className="sm:col-span-3">
                           <label htmlFor="firstName" className="block text-sm font-medium text-blue-gray-900">
-                            First name
+                            Name
                           </label>
                           <input
                             type="text"
-                            name="firstName"
-                            id="firstName"
-                            placeholder="John"
-                            value={userData.firstName} 
-                            onChange={(e)=>{setUserData({...userData, firstName: e.target.value})}}
-                            className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                          />
-                        </div>
-
-                        <div className="sm:col-span-3">
-                          <label htmlFor="lastName" className="block text-sm font-medium text-blue-gray-900">
-                            Last name
-                          </label>
-                          <input
-                            type="text"
-                            name="lastName"
-                            id="lastName"
-                            placeholder="Smith"
-                            value={userData.lastName} 
-                            onChange={(e)=>{setUserData({...userData, lastName: e.target.value})}}
+                            name="name"
+                            id="name"
+                            value={user?.result?.name} 
+                            onChange={(e)=>{setUserData({...userData, name: e.target.value})}}
                             className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                           />
                         </div>
 
 
-                        <div className="sm:col-span-6">
+                        {/* <div className="sm:col-span-6">
                           <label htmlFor="photo" className="block text-sm font-medium text-blue-gray-900">
                             Photo
                           </label>
@@ -132,7 +102,7 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
                               </button>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="sm:col-span-6">
                           <label htmlFor="banner" className="block text-sm font-medium text-blue-gray-100">
@@ -142,7 +112,7 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
                             type="text"
                             name="banner"
                             id="banner"
-                            value={userData.banner} 
+                            value={user?.result?.banner} 
                             onChange={(e)=>{setUserData({...userData, banner: e.target.value})}}
                             className="mt-1 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500"
                           />
@@ -158,7 +128,7 @@ import { createUserInfo, patchProfile } from '../actions/userInfo';
                               name="bio"
                               rows={4}
                               className="block w-full border border-blue-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
-                              value={userData.bio} 
+                              value={user?.result?.bio} 
                             onChange={(e)=>{setUserData({...userData, bio: e.target.value})}}
                             />
                           </div>

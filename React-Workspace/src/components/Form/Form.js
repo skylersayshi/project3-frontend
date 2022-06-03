@@ -64,21 +64,21 @@ const Form = ({currentId, setCurrentId}) => {
     return (
       <form autoComplete="off" onSubmit={handleSubmit} className="relative">
       <div className="mb-4 border border-gray-300 rounded-lg shadow-sm overflow-hidden focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-        <div className="border-b border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3 bg-gray-800">
-            <div className="flex">
+        <div className="w-full border-b border-gray-200 px-2 py-2 flex justify-between items-center space-x-3 sm:px-3 bg-gray-800">
+            <div >
               <div              
-                className="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex text-left text-gray-400 group"
+                className="-ml-2 -my-2 rounded-full px-3 py-2 inline-flex text-left text-gray-400"
               >
                 <img
-                  className="h-14 w-14 rounded-full ml-1 mt-1 mb-1 mr-0"
+                  className="w-10 h-10 rounded-full m-1"
                   src={user?.result?.selectedFile}
                   alt=""
                 />
               </div>
             </div>
-            <div className="block w-full text-xl text-left font-medium focus:ring-0">
+            <div className="block text-xl text-left font-medium focus:ring-0 -mr-2">
               <div
-                className="text-gray-300"
+                className="text-gray-300 mr-2"
               >
                 {user?.result?.name}
               </div>

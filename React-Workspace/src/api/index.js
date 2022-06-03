@@ -22,15 +22,12 @@ export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 
 export const signIn = (formData) => API.post('/users/signin', formData);
+
 export const signUp = (formData) => API.post('/users/signup', formData);
 
+export const fetchUsers = () => API.get('/users/profile')
 
-//getrecipes
-
-
-//createrecipe
-//updaterecipe
-//deleterecipe
+export const updateProfile = (id, profileData) => API.patch(`/users/profile/${id}`, profileData);
 
 export const getrecipes = () => API.get('/recipes');
 
