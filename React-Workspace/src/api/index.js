@@ -15,7 +15,7 @@ export const fetchPosts = () => API.get('/posts');
 
 export const createPost = (newPost) => API.post('/posts', newPost);
 
-export const updatePost = (id, updatedPost) => API.patch(`posts/${id}`, updatedPost);
+export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updatedPost);
 
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 
@@ -36,6 +36,6 @@ export const getrecipes = () => API.get('/recipes');
 
 export const createrecipe = (newRecipe) => API.post('/recipes', newRecipe);
 
-export const updaterecipe = (id, updatedRecipe) => API.patch(`recipes/${id}`, updatedRecipe);
+export const updaterecipe = (id, updatedRecipe) => API.patch(`/recipes/${id}`, updatedRecipe);
 
-export const deleterecipe = (id) => API.delete(`/recipe/${id}`);
+export const deleterecipe = (id) => API.delete(`/recipes/${id}`);

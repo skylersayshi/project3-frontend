@@ -1,27 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import ChangeThis from '../ChangeThis';
 import RecipeForm from './Form/RecipeForm';
 import Recipe from './Recipe/Recipe';
+import { useDispatch } from 'react-redux';
+import { getRecipes } from '../../actions/recipes';
+
+
 
 const Recipes = () => {
     const [currentId, setCurrentId] = useState(0);
+    const dispatch = useDispatch();
 
     const recipes = useSelector((state)=>state.recipes);
     console.log(recipes);
 
+    useEffect(()=>{
+      dispatch(getRecipes());
+    }, [currentId, dispatch]);
+
   return (
-    !recipes.length ? <ChangeThis /> : (
+    // !recipes.length ? <ChangeThis /> : (
     <div>
         <RecipeForm currentId={currentId} setCurrentId={setCurrentId}/>
-        <ul>
+        
             {recipes.map((recipe)=>(
                 <Recipe key={recipe._id} recipe={recipe} currentId={currentId} setCurrentId={setCurrentId}/>
             ))}
-        </ul>
+        
     </div>
     )
-  )
+  // )
 }
 
 export default Recipes
