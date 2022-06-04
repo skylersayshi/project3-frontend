@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/SettingsForm'
 import { useDispatch } from 'react-redux'
 import Recipes from './components/Recipes/Recipes';
+import DevPage from './components/DevPage';
 
 
 
@@ -33,6 +34,7 @@ function App() {
           <Route path="/recipes" exact element={<Recipes/>}/>
           <Route path="/profile" exact element={<Profile />}/>
           <Route path="/profile/edit" exact element={<Settings />}/>
+          <Route path="/communities" exact element={<DevPage/>} />
         </Routes>
     </Router>
     {/* <Posts /> */}
