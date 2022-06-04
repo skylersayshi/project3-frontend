@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Fragment} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createRecipe, updateRecipe } from '../../../actions/recipes';
+import FileBase from 'react-file-base64';
 
 const RecipeForm = ({currentId, setCurrentId}) => {
   const user = JSON.parse(localStorage.getItem('profile'));
@@ -10,6 +11,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
     ingredients: '',
     instructions: '',
     img: '',
+    selectedFile: '',
 
   });
 
@@ -33,7 +35,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
   }
 
   const handleSubmit = async (event) =>{
-    event.preventDefault();
+    // event.preventDefault();
     if(currentId===0){
       dispatch(createRecipe({...recipeData}))
       
@@ -59,6 +61,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
     <div>
       <form onSubmit={handleSubmit}>
         <input 
+         style={{marginRight: 20}}
           name="name"
           id="name"
           onChange={(e)=>{setRecipeData({...recipeData, name: e.target.value})}}
@@ -66,6 +69,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
           value={recipeData.name}
         />
         <input 
+          style={{marginRight: 20}}
           name="ingredients"
           id="ingredients"
           onChange={(e)=>{setRecipeData({...recipeData, ingredients: e.target.value})}}
@@ -73,6 +77,7 @@ const RecipeForm = ({currentId, setCurrentId}) => {
           value={recipeData.ingredients}
         />
         <input 
+          style={{marginRight: 20}}
           name="instructions"
           id="instructions"
           onChange={(e)=>{setRecipeData({...recipeData, instructions: e.target.value})}}
@@ -80,12 +85,14 @@ const RecipeForm = ({currentId, setCurrentId}) => {
           value={recipeData.instructions}
         />
         <input 
+          style={{marginRight: 20}}
           name="img"
           id="img"
           onChange={(e)=>{setRecipeData({...recipeData, img: e.target.value})}}
           placeholder="img"
           value={recipeData.img}
         />
+
         <button type="submit">Submit</button>
       </form>
     </div>

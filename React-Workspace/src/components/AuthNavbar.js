@@ -49,13 +49,14 @@ const AuthNavbar = () => {
                     {/* logo */}
                     <img
                       className="block lg:hidden h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                      alt="Workflow"
+                      // src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      // alt="Workflow"
                     />
                     {/* logo */}
                     <img
-                      className="hidden lg:block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                    
+                      className="hidden lg:block h-8 w-auto "
+                      src="https://dcassetcdn.com/design_img/2488440/598545/598545_13315225_2488440_f322f48d_image.jpg"
                       alt="Workflow"
                     />
                   </div>
