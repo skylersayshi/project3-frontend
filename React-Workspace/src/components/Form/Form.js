@@ -4,7 +4,8 @@ import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
 import { Listbox, Transition } from '@headlessui/react'
-import { CalendarIcon, PaperClipIcon, TagIcon, UserCircleIcon } from '@heroicons/react/solid'
+import { CalendarIcon, PaperClipIcon, TagIcon, UserCircleIcon, InformationCircleIcon } from '@heroicons/react/solid';
+import { Link } from 'react-router-dom';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -57,7 +58,25 @@ const Form = ({currentId, setCurrentId}) => {
 
     if(!user?.result?.name){
       return (
-        <div>Please login to make a post</div>
+        
+          <div className="rounded-md bg-blue-50 p-4 m-2">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <InformationCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />
+              </div>
+              <div className="ml-3 flex-1 md:flex md:justify-between">
+                <p className="text-sm text-blue-700">Please Sign in to make a post</p>
+                <p className="mt-3 text-sm md:mt-0 md:ml-6">
+                  <Link to="/auth">
+                  <a href="#" className="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600">
+                    Login <span aria-hidden="true">&rarr;</span>
+                  </a>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        
       )
     }
 

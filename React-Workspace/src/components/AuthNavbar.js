@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
@@ -25,7 +25,7 @@ const AuthNavbar = () => {
     const page = query.get('page') || 1
     const searchQuery = query.get('searchQuery');
     const [search, setSearch] = useState('');
-    const [tags, setTags] = useState([]);
+    const [tags, setTags] = useState('');
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
@@ -51,9 +51,12 @@ const AuthNavbar = () => {
 
     const handleKeyPress = (e) => {
       if(e.keyCode === 13) {
-        if(search.trim()){
-          dispatch(getPostsBySearch({ search })) //, tags: tags.join(',')
-          console.log('this hit')
+        if(search.trim() || tags){
+          dispatch(getPostsBySearch({ search, tags }));
+          // history(`/posts/search?searchQuery=${search || 'none'}&tags=${tags}`)
+          history('/')
+          console.log(tags)
+          console.log(search)
         }
         else{
           history('/')
@@ -94,7 +97,7 @@ const AuthNavbar = () => {
                         to="/"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                       >
-                        Feed
+                        Home
                       </Link>
                       <Link
                         to="/calories"
@@ -124,10 +127,10 @@ const AuthNavbar = () => {
                         id="search"
                         name="search"
                         value={search}
-                        onChange={(e)=>setSearch(e.target.value)}
+                        onChange={(e)=>{setSearch(e.target.value);setTags(e.target.value)}}
                         onKeyDown={handleKeyPress}
                         className="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
-                        placeholder="Search"
+                        placeholder="Search by Title or Tag"
                         type="search"
                       />
                     </div>
@@ -242,47 +245,20 @@ const AuthNavbar = () => {
             <Disclosure.Panel className="lg:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Dashboard
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Team
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Projects
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  Calendar
-                </Disclosure.Button>
+                
               </div>
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={user?.result?.selectedFile}
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
-                    <div className="text-base font-medium text-white">Tom Cook</div>
-                    <div className="text-sm font-medium text-gray-400">tom@example.com</div>
+                    <div className="text-base font-medium text-white">{user.result.name}</div>
+                    <div className="text-sm font-medium text-gray-400">{user.result.email}</div>
                   </div>
                   <button
                     type="button"
@@ -293,13 +269,17 @@ const AuthNavbar = () => {
                   </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
+                <Link to='/profile'>
                   <Disclosure.Button
                     as="a"
                     href="#"
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                   >
                     Your Profile
+                  
                   </Disclosure.Button>
+                </Link>
+                <Link to="/profile/edit">
                   <Disclosure.Button
                     as="a"
                     href="#"
@@ -307,6 +287,7 @@ const AuthNavbar = () => {
                   >
                     Settings
                   </Disclosure.Button>
+                  </Link>
                   <Disclosure.Button
                     onClick={logout}
                     as="a"
