@@ -3,17 +3,30 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
 import FileBase from 'react-file-base64';
+import Posts from './Posts/Posts';
 
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { SearchIcon } from '@heroicons/react/solid'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { getPosts, getPostsBySearch } from '../actions/posts';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+function useQuery(){
+  return new URLSearchParams(useLocation().search);
+}
+
 const AuthNavbar = () => {
+
+    const query = useQuery()
+    const page = query.get('page') || 1
+    const searchQuery = query.get('searchQuery');
+    const [search, setSearch] = useState('');
+    const [tags, setTags] = useState([]);
+
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -36,7 +49,18 @@ const AuthNavbar = () => {
       setUser(JSON.parse(localStorage.getItem('profile')))
     },[location]);
 
-    // console.log(user?.result);
+    const handleKeyPress = (e) => {
+      if(e.keyCode === 13) {
+        if(search.trim()){
+          dispatch(getPostsBySearch({ search })) //, tags: tags.join(',')
+          console.log('this hit')
+        }
+        else{
+          history('/')
+          console.log('this hit problem')
+        }
+      }
+    }
 
     return (
       <Disclosure as="nav" className="bg-gray-800">
@@ -45,21 +69,23 @@ const AuthNavbar = () => {
             <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
               <div className="relative flex items-center justify-between h-16">
                 <div className="flex items-center px-2 lg:px-0">
+                  <Link to="/">
                   <div className="flex-shrink-0">
                     {/* logo */}
                     <img
                       className="block lg:hidden h-8 w-auto"
-                      // src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      src="https://i.imgur.com/tIiMLTy.png"
                       // alt="Workflow"
                     />
                     {/* logo */}
                     <img
                     
                       className="hidden lg:block h-8 w-auto "
-                      src="https://dcassetcdn.com/design_img/2488440/598545/598545_13315225_2488440_f322f48d_image.jpg"
-                      alt="Workflow"
+                      src="https://i.imgur.com/DRYgv3y.png"
+                      // alt="Workflow"
                     />
                   </div>
+                  </Link>
                   <div className="hidden lg:block lg:ml-6">
                     <div className="flex space-x-4">
                       {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
@@ -97,6 +123,9 @@ const AuthNavbar = () => {
                       <input
                         id="search"
                         name="search"
+                        value={search}
+                        onChange={(e)=>setSearch(e.target.value)}
+                        onKeyDown={handleKeyPress}
                         className="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
                         placeholder="Search"
                         type="search"

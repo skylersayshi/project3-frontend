@@ -1,5 +1,6 @@
 
 import { Fragment, useState, useEffect } from 'react'
+
 import { getPosts } from '../actions/posts'
 import { useDispatch } from 'react-redux'
 import { Menu, Popover, Transition } from '@headlessui/react'
@@ -20,7 +21,7 @@ import { Link } from 'react-router-dom';
 import Posts from '../components/Posts/Posts';
 import Pagination from '../components/Pagination';
 import { useSelector } from 'react-redux';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const navigation = [
   { name: 'Home', href: '/', icon: HomeIcon, current: true },
