@@ -15,7 +15,9 @@ import Profile from './Profile';
   const [currentId, setCurrentId] = useState(user.result._id)
   const dispatch = useDispatch();
   const userProfile = useSelector((state)=> currentId ? state.users.find((specificUser)=> specificUser._id === currentId) : null);
-console.log(user)
+  
+  
+
   useEffect(()=>{
     dispatch(getusers());
   }, [currentId, dispatch]);

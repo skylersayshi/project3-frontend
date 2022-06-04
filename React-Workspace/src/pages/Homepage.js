@@ -18,6 +18,8 @@ import {
 import { BellIcon, FireIcon, HomeIcon, MenuIcon, TrendingUpIcon, UserGroupIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom';
 import Posts from '../components/Posts/Posts';
+import Pagination from '../components/Pagination';
+import { useSelector } from 'react-redux';
 
 
 const navigation = [
@@ -26,11 +28,7 @@ const navigation = [
   { name: 'Communities', href: '/communities', icon: UserGroupIcon, current: false },
   { name: 'Trending', href: '/trending', icon: TrendingUpIcon, current: false },
 ]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
+
 const communities = [
   { name: 'Movies', href: 'communities/movies' },
   { name: 'Food', href: 'communities/food' },
@@ -44,53 +42,6 @@ const communities = [
 const tabs = [
   { name: 'Recent', href: '#', current: true },
   { name: 'Most Liked', href: '#', current: false },
-  { name: 'Following', href: '#', current: false },
-]
-const questions = [
-  {
-    id: '81614',
-    likes: '29',
-    replies: '11',
-    views: '2.7k',
-    author: {
-      name: 'Dries Vincent',
-      imageUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-      href: 'user/:id',
-    },
-    date: 'December 9 at 11:43 AM',
-    datetime: '2020-12-09T11:43:00',
-    href: '#',
-    title: 'What would you have done differently if you ran Jurassic Park?',
-    body: `
-      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
-      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
-    `,
-  },
-  // More questions...
-]
-const whoToFollow = [
-  {
-    name: 'Leonard Krasner',
-    handle: 'leonardkrasner',
-    href: '#',
-    imageUrl:
-      'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  // More people...
-]
-const trendingPosts = [
-  {
-    id: 1,
-    user: {
-      name: 'Floyd Miles',
-      imageUrl:
-        'https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-    body: 'What books do you have on your bookshelf just to look smarter than you actually are?',
-    comments: 291,
-  },
-  // More posts...
 ]
 
 function classNames(...classes) {
@@ -101,14 +52,40 @@ export default function Homepage() {
 
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
-
-
+  const user = JSON.parse(localStorage.getItem('profile'));
 
   useEffect(()=>{
     dispatch(getPosts());
   }, [currentId, dispatch]);
-  
-  const user=JSON.parse(localStorage.getItem('profile'));
+
+  const posts = useSelector((state)=>state.posts);
+
+  const [postOrderRecent, setPostOrderRecent] = useState(true);
+  const [activeTab, setActiveTab] = useState(true);
+  const newSort = () => {
+    setPostOrderRecent(!postOrderRecent)
+    setActiveTab(!activeTab)
+  }
+
+  let sortedPosts = []
+    for(let i = posts.length-1; i >= 0; i--){
+      sortedPosts.push(posts[i])
+    }    
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  let currentPosts;
+
+  if(postOrderRecent === true){
+    currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  } else {
+    const rankedPosts = sortedPosts.sort((a,b) => b.likes.length - a.likes.length)
+    currentPosts = rankedPosts.slice(indexOfFirstPost, indexOfLastPost);}
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <>
@@ -164,44 +141,52 @@ export default function Homepage() {
             </div>
             <main className="lg:col-span-9 xl:col-span-6">
               <div className="px-4 sm:px-0">
-                <div className="sm:hidden">
-                  <label htmlFor="question-tabs" className="sr-only">
-                    Select a tab
-                  </label>
-                  <select
-                    id="question-tabs"
-                    className="block w-full rounded-md border-gray-300 text-base font-medium text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                    defaultValue={tabs.find((tab) => tab.current).name}
-                  >
-                    {tabs.map((tab) => (
-                      <option key={tab.name}>{tab.name}</option>
-                    ))}
-                  </select>
-                </div>
                 <div className="hidden sm:block">
                   <nav className="relative z-0 rounded-lg shadow flex divide-x divide-gray-200" aria-label="Tabs">
-                    {tabs.map((tab, tabIdx) => (
+                    {/* {tabs.map((tab, tabIdx) => ( */}
                       <a
-                        key={tab.name}
-                        href={tab.href}
-                        aria-current={tab.current ? 'page' : undefined}
+                        
+                        key="recent"
+                        onClick={newSort}
+                        // aria-current={tab.current ? 'page' : undefined}
                         className={classNames(
-                          tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
-                          tabIdx === 0 ? 'rounded-l-lg' : '',
-                          tabIdx === tabs.length - 1 ? 'rounded-r-lg' : '',
+                          activeTab===true ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
+                          'rounded-l-lg',
                           'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
                         )}
                       >
-                        <span>{tab.name}</span>
+                        <span>Recent</span>
                         <span
                           aria-hidden="true"
                           className={classNames(
-                            tab.current ? 'bg-indigo-500' : 'bg-transparent',
+                          activeTab===true ? 'bg-indigo-500' : 'bg-transparent',
+                            'absolute inset-x-0 bottom-0 h-0.5'
+                          )}
+
+                        />
+                      </a>
+
+                      <a
+                        
+                        key="mostliked"
+                        onClick={newSort}
+                        // aria-current={tab.current ? 'page' : undefined}
+                        className={classNames(
+                          activeTab===false ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
+                          'rounded-r-lg',
+                          'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-6 text-sm font-medium text-center hover:bg-gray-50 focus:z-10'
+                        )}
+                      >
+                        <span>Most Liked</span>
+                        <span
+                          aria-hidden="true"
+                          className={classNames(
+                            activeTab===false ? 'bg-indigo-500' : 'bg-transparent',
                             'absolute inset-x-0 bottom-0 h-0.5'
                           )}
                         />
                       </a>
-                    ))}
+                    {/* ))} */}
                   </nav>
                 </div>
               </div>
@@ -210,7 +195,8 @@ export default function Homepage() {
               <div className="mt-4">
                 <h1 className="sr-only">Recent</h1>
                 <ul role="list" className="space-y-4">
-                  <Posts currentId={currentId} setCurrentId={setCurrentId}/>
+                  <Posts currentId={currentId} setCurrentId={setCurrentId} posts={currentPosts} />
+                  <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} currentPage={currentPage}/>
                   {/* {questions.map((question) => (
                     <li key={question.id} className="bg-white px-4 py-6 shadow sm:p-6 sm:rounded-lg">
                       <article aria-labelledby={'question-title-' + question.id}>
