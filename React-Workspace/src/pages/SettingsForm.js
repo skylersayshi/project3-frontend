@@ -35,7 +35,7 @@ import Profile from './Profile';
     const handleSubmit = async (event) =>{
       event.preventDefault();
       
-        dispatch(updateprofile(currentId, {...userData}))
+        dispatch(updateprofile(currentId, {...userData, name: user?.result?.name, email: user?.result?.email, id: user?.result?.id}))
         console.log(currentId);
     }
 
@@ -149,12 +149,14 @@ import Profile from './Profile';
                         >
                           Cancel
                         </Link>
+                        <Link to='/profile'>
                         <button
                           type="submit"
                           className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         >
                           Save
                         </button>
+                        </Link>
                       </div>
                     </form>
                   </div>
