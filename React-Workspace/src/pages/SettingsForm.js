@@ -23,7 +23,6 @@ import Profile from './Profile';
   }, [currentId, dispatch]);
 
   const [userData, setUserData] = useState({
-      // creator: '',
       name: '',
       bio: '',
       selectedFile: user?.result?.selectedFile,
@@ -38,7 +37,7 @@ import Profile from './Profile';
       event.preventDefault();
       
         dispatch(updateprofile(currentId, {...userData}))
-        console.log(currentId);
+        
     }
 
 

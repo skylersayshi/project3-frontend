@@ -20,7 +20,7 @@ export default function Profile() {
     const dispatch = useDispatch();
     const history = useNavigate();
     const location = useLocation();
-    console.log(user);
+    console.log(User);
 
     // const logout = () =>{
     //   dispatch({type: 'LOGOUT'})
@@ -51,7 +51,7 @@ export default function Profile() {
       <div clagetssName="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
           <div className="flex">
-            <img className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src={profile.avatar} alt="" />
+            <img className="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32" src={User.result.selectedFile} alt="" />
           </div>
           <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
@@ -65,7 +65,23 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <h1>hello world</h1>
+      <div>
+      <header className="bg-white shadow">
+          <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold text-gray-900">Profile Bio</h1>
+          </div>
+        </header>
+        <main>
+          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            <div className="px-4 py-6 sm:px-0">
+              <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
+              {!User.result.bio  ? <h3>No bio yet, please add one in the edit profile page</h3> : <h3>{User.result.bio}</h3>}
+              {/* <h1>Bio</h1> */}
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   )
 }
