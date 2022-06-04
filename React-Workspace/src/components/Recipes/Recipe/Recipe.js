@@ -66,9 +66,18 @@ const user = JSON.parse(localStorage.getItem('profile'));
                   </div>
                   <div className="ml-4 flex-shrink-0">
                   </div>
-                  <div>      
-                      <button style={{backgroundColor: "red", marginRight: 10}} onClick={()=>setCurrentId(recipe._id)}>!!Edit Recipe!!</button>
-                      <button style={{backgroundColor: "blue"}} onClick={()=>dispatch(deleteRecipe(recipe._id))}>!!DeleteRecipe!!</button>
+                  <div>   
+
+                    <div class="inline-flex">
+                          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l" onClick={()=>setCurrentId(recipe._id)}>
+                                Edit
+                            </button>
+                      <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r" onClick={()=>dispatch(deleteRecipe(recipe._id))}>
+                           Delete Recipe
+                          </button>
+</div>   
+                      {/* <button style={{backgroundColor: "red", marginRight: 10}} onClick={()=>setCurrentId(recipe._id)}>!!Edit Recipe!!</button>
+                      <button style={{backgroundColor: "blue"}} onClick={()=>dispatch(deleteRecipe(recipe._id))}>!!DeleteRecipe!!</button> */}
                  </div>
                 </li>
               </ul>
