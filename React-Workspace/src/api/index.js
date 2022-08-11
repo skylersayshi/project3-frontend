@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({baseURL: 'http://localhost:5001'})
+const API = axios.create({baseURL: 'https://whispering-refuge-62936.herokuapp.com/'})
 
 API.interceptors.request.use((req)=>{
     if(localStorage.getItem('profile')){
